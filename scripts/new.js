@@ -33,7 +33,7 @@ function showItems(l) {
     );
     span_title.setAttribute(
       "style",
-      " font-family: Montserrat Light,sans-serif; font-weight: 300;letter-spacing: .18px;line-height: 20px;color: #12284c;font-size: 14px;"
+      " font-family: Montserrat Light,sans-serif; font-weight: 300;letter-spacing: .18px;line-height: 20px;color: #12284c;font-size: 14px; text-transform: capitalize;"
     );
     p_price.setAttribute(
       "style",
@@ -85,6 +85,7 @@ async function getData() {
     let data = await res.json();
     localStorage.setItem("items", JSON.stringify(data));
     showItems(data);
+    console.log(data);
   } catch (err) {
     console.log(err);
   }

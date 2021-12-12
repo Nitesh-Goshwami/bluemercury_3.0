@@ -4,7 +4,7 @@ const cors = require("cors");
 const connect = require("./config/connectionDb");
 
 //default app port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Middlewares
 const app = express();

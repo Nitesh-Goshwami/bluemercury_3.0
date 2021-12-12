@@ -328,37 +328,37 @@
                     <p id="complete_form">Complete the form below to create a bluemercury.com account.</p>
                 </header>
 
-                <!-- <form id="form" onsubmit="store(event)"> -->
-                <input type="email" id="email" class="input" placeholder="Email*" required>
-                <input type="text" id="first_name" class="input" placeholder="First Name*" required>
-                <input type="text" id="last_name" class="input" placeholder="Last Name*" required>
-                <input type="password" id="password" class="input" placeholder="Password*" required>
-                <p id="input_required">*Indicates Required Field</p>
+                <form id="form" onsubmit="checkSignup(event)">
+                    <input type="email" id="email" class="input" placeholder="Email*" required>
+                    <input type="text" id="first_name" class="input" placeholder="First Name*" required>
+                    <input type="text" id="last_name" class="input" placeholder="Last Name*" required>
+                    <input type="password" id="password" class="input" placeholder="Password*" required>
+                    <p id="input_required">*Indicates Required Field</p>
 
-                <div id="checkbox_join_container">
-                    <div id="blue_join_rewards">
-                        <div id="blue_join_rewards_div1">
-                            <input type="checkbox" id="checkbox">
-                        </div>
-                        <div id="blue_join_rewards_div2">
-                            <!-- <span id="blue_join_row1">                             -->
-                            <span id="join">join</span>
-                            <span id="blue">BLUE<span id="rewards">REWARDS</span></span>
-                            <!-- </span>                         -->
-                        </div>
-                        <div>
-                            <span id="blue_join_row2">
-                                Earn $10 for every $250 you spend, plus FREE birthday gifts & treatments!
-                            </span>
+                    <div id="checkbox_join_container">
+                        <div id="blue_join_rewards">
+                            <div id="blue_join_rewards_div1">
+                                <input type="checkbox" id="checkbox">
+                            </div>
+                            <div id="blue_join_rewards_div2">
+                                <!-- <span id="blue_join_row1">                             -->
+                                <span id="join">join</span>
+                                <span id="blue">BLUE<span id="rewards">REWARDS</span></span>
+                                <!-- </span>                         -->
+                            </div>
+                            <div>
+                                <span id="blue_join_row2">
+                                    Earn $10 for every $250 you spend, plus FREE birthday gifts & treatments!
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <p id="privacy_policy">To learn more about how we use your information and your rights, see <a
-                            href="Signup.html">Privacy Note</a></p>
-                </div>
-                <button id="create_account_btn" onclick="store()">CREATE ACCOUNT</button>
-
+                    <div>
+                        <p id="privacy_policy">To learn more about how we use your information and your rights, see <a
+                                href="Signup.html">Privacy Note</a></p>
+                    </div>
+                    <button type="submit" id="create_account_btn">CREATE ACCOUNT</button>
+                </form>
                 <div>
                     <span id="already_account">
                         Already have a bluemercury.com account?

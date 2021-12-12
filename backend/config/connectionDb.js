@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 // Database credentials
 const USERNAME = "bluemercury";
@@ -10,12 +10,12 @@ const DEFAULT_CONNECTION_STRING = `mongodb+srv://${USERNAME}:${PASSWORD}@cluster
 
 // Mongoose options for connection
 const MONGOOSE_OPTIONS = {
-  useCreateIndex: true,
-  useFindAndModify: false,
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-};
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology:true,
+    useNewUrlParser:true
+}
 
 module.exports = () => {
-  mongoose.connect(DEFAULT_CONNECTION_STRING, MONGOOSE_OPTIONS);
-};
+    mongoose.connect(DEFAULT_CONNECTION_STRING, MONGOOSE_OPTIONS);
+}

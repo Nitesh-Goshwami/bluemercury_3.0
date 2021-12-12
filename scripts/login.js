@@ -1,36 +1,45 @@
-const current_user = [];
+async function check(e) {
+  e.preventDefault();
 
-async function check() {
-
-  var res = await fetch("http://localhost:3000/users/");
-  var all_users = await res.json();
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  console.log(all_users)
- 
 
-  const current_user_credentials = {
-    email: email,
-    password: password
-  }
+  var res = await fetch("http://localhost:3001/users/login", {
+    // Adding method type
+    method: "POST",
 
-  let login_flag = 0;
+    // Adding body or content to send
+    body: JSON.stringify({
+      email,
+      password,
+    }),
 
-  for (let i = 0; i < all_users.length; i++) {
-    console.log("abc")
-    if (all_users[i].email == email && all_users[i].password == password) {
-      login_flag = 1;
-      current_user.push(current_user_credentials);
-      localStorage.setItem("current_user", JSON.stringify(current_user));
-      window.location.href = "myaccount.html";
-    } else if (all_users[i].email == email) {
-      login_flag = 1;
-      alert("Invalid Credentials");
-    }
-  }
+    // Adding headers to request
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
 
-  if (login_flag == 0) {
+  var current_user = await res.json();
+
+  if (res.status === 402) {
+    alert("Invalid Credentials");
+  } else if (res.status === 201) {
+    localStorage.setItem("current_user", JSON.stringify(current_user));
+    window.location.href = "myaccount.html";
+  } else if (res.status === 401) {
     alert("User does not exist, please signup first");
     window.location.href = "signup.html";
   }
 }
+
+function checkUserAlreadyLogin() {
+  let user = localStorage.getItem("current_user");
+
+  if (user !== null) {
+    console.log("User is already logged in, please logout first");
+    window.location.href = "myaccount.html";
+  }
+}
+
+checkUserAlreadyLogin();
