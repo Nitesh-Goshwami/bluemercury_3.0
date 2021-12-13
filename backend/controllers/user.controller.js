@@ -92,5 +92,30 @@ router.delete("/:id", async (request, response) => {
   }
 });
 
+// Update Cart
+router.put("/cart/:id", async (req, res) => {
+  console.log(req.params, req.body);
+  const { id } = req.params;
+  console.log("Here", id);
+  try {
+    const results = await User.updateOne(
+      {
+        _id: id,
+      },
+      {
+        $set: {
+          "cart_items": req.body,
+        },
+      }
+    );
+    const userData = await User.find().lean().exec();
+    console.log("userData", userData);
+    console.log("results", results);
+    return res.status(201).send(userData);
+  } catch (err) {
+    return res.status(401).send(err.message);
+  }
+});
+
 //export
 module.exports = router;

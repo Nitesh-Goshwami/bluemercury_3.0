@@ -346,9 +346,9 @@ dropdown_price.addEventListener("click", function () {
 
 function addtoVisited(obj) {
   console.log("Obj: ", obj);
-  let singleProdArr = [];
-  singleProdArr.push(obj);
+  // let singleProdArr = {};
+  // singleProdArr.push(obj);
 
-  localStorage.setItem('current_selected_prod', JSON.stringify(singleProdArr));
+  localStorage.setItem('current_selected_prod', JSON.stringify(obj));
   window.location.href = "product.html";
 }

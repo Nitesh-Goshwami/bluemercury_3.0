@@ -24,7 +24,9 @@ app.use("/users", userController);
 app.listen(PORT, async () => {
   try {
     await connect();
-    console.log(`Bluemercury is connected successfully to Express. Listening on port ${PORT}.`);
+    console.log(
+      `Bluemercury is connected successfully to Express. Listening on port ${PORT}.`
+    );
   } catch (err) {
     console.error();
   }
