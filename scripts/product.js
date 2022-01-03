@@ -33,7 +33,9 @@ cart_btn.addEventListener("click", async function () {
     let currentUser = JSON.parse(localStorage.getItem("current_user"));
 
     // Before updating new product, fetching the latest user details
-    await fetch(`http://localhost:3001/users/${currentUser._id}`)
+    await fetch(
+      `https://bluemercuryclone.herokuapp.com/users/${currentUser._id}`
+    )
       .then((res) => res.json())
       .then((res) => {
         localStorage.setItem("current_user", JSON.stringify(res));
@@ -75,19 +77,22 @@ cart_btn.addEventListener("click", async function () {
       
       console.log("currentUser", currentUser);
       
-      fetch(`http://localhost:3001/users/cart/${currentUser._id}`, {
-        method: "PUT",
+      fetch(
+        `https://bluemercuryclone.herokuapp.com/users/cart/${currentUser._id}`,
+        {
+          method: "PUT",
 
-        headers: {
-          "Content-type": "application/json",
-        },
+          headers: {
+            "Content-type": "application/json",
+          },
 
-        body: JSON.stringify({
-          cart_items: currentUser.cart.cart_items,
-          total_price: currentUser.cart.total_price,
-          total_items: currentUser.cart.total_items,
-        }),
-      })
+          body: JSON.stringify({
+            cart_items: currentUser.cart.cart_items,
+            total_price: currentUser.cart.total_price,
+            total_items: currentUser.cart.total_items,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then((res) => {
           localStorage.setItem("current_user", JSON.stringify(...res));

@@ -603,7 +603,7 @@ const items = [
   // <-------------------------------Fetching the data from online database -------------------------->
   async function getData() {
     try {
-      let res = await fetch("http://localhost:3000/products/");
+      let res = await fetch("https://bluemercuryclone.herokuapp.com/products/");
       let data = await res.json();
       showItems(data);
     } catch (err) {
@@ -801,7 +801,7 @@ const items = [
   
   // Sorting Functions for Low to high and High to low
   async function sortLH() {
-    let res = await fetch("http://localhost:3000/products/");
+    let res = await fetch("https://bluemercuryclone.herokuapp.com/products/");
     let data = await res.json();
   
     data = data.sort(function (a, b) {
@@ -811,7 +811,7 @@ const items = [
   }
   
   async function sortHL() {
-    let res = await fetch("http://localhost:3000/products/");
+    let res = await fetch("https://bluemercuryclone.herokuapp.com/products/");
     let data = await res.json();
   
     data = data.sort(function (a, b) {

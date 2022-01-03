@@ -123,7 +123,7 @@ async function filterBrand() {
     models: getClassOfCheckedCheckboxes(modelCbs),
   };
 
-  let res = await fetch("http://localhost:3000/products/");
+  let res = await fetch("https://bluemercuryclone.herokuapp.com/products/");
   let items = await res.json();
 
   let filterArr = [];
@@ -157,7 +157,7 @@ async function filterPrice() {
     models: getClassOfCheckedCheckboxes(modelCbs),
   };
 
-  let res = await fetch("http://localhost:3000/products/");
+  let res = await fetch("https://bluemercuryclone.herokuapp.com/products/");
   let items = await res.json();
   let filterArr = []; //JSON.parse(localStorage.getItem('filteredArr'));
 
@@ -214,7 +214,7 @@ async function checkOption() {
 
   //let items = JSON.parse(localStorage.getItem('items'));
 
-  let res = await fetch("http://localhost:3000/products/");
+  let res = await fetch("https://bluemercuryclone.herokuapp.com/products/");
   let items = await res.json();
   let filterArr = []//JSON.parse(localStorage.getItem('filteredArr'));
 
@@ -246,7 +246,7 @@ async function showCategory() {
 
   //let items = JSON.parse(localStorage.getItem('items'));
 
-  let res = await fetch("http://localhost:3000/products/");
+  let res = await fetch("https://bluemercuryclone.herokuapp.com/products/");
   let items = await res.json();
 
   let filterArr = []//JSON.parse(localStorage.getItem('filteredArr'));
@@ -287,7 +287,7 @@ function getClassOfCheckedCheckboxes(checkboxes) {
 
 // Sorting Functions for Low to high and High to low
 async function sortLH() {
-  let res = await fetch("http://localhost:3000/products/");
+  let res = await fetch("https://bluemercuryclone.herokuapp.com/products/");
   let data = await res.json();
 
   let filterArr = JSON.parse(localStorage.getItem("filteredArr"));
@@ -306,7 +306,7 @@ async function sortLH() {
 }
 
 async function sortHL() {
-  let res = await fetch("http://localhost:3000/products/");
+  let res = await fetch("https://bluemercuryclone.herokuapp.com/products/");
   let data = await res.json();
   let filterArr = JSON.parse(localStorage.getItem("filteredArr"));
 

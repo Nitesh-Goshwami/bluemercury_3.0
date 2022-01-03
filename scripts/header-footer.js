@@ -57,7 +57,9 @@ hideput.addEventListener('input', (e) => {
         suggestings.style.display = 'block';
         async function gettingData() {
             try {
-                let res = await fetch("http://localhost:3000/products/");
+                let res = await fetch(
+                  "https://bluemercuryclone.herokuapp.com/products/"
+                );
                 let data = await res.json();
                 showsuggestions(data, vaalu);
             } catch (err) {
@@ -83,7 +85,9 @@ hideput.addEventListener("keyup", function (event) {
         console.log(hideput.value.length);
         async function gettingData() {
             try {
-                let res = await fetch("http://localhost:3000/products/");
+                let res = await fetch(
+                  "https://bluemercuryclone.herokuapp.com/products/"
+                );
                 let data = await res.json();
                 //   console.log(data);
                 var ViewObj = [];

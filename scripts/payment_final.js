@@ -1,9 +1,11 @@
 let currentUser = JSON.parse(localStorage.getItem('current_user'));
 
 async function showCart() {
-  currentUser = await fetch(`http://localhost:3001/users/${currentUser._id}`)
-    .then(res => res.json())
-    .catch(err => console.log(err));
+  currentUser = await fetch(
+    `https://bluemercuryclone.herokuapp.com/users/${currentUser._id}`
+  )
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
 
   let cart = currentUser.cart.cart_items
   for (let i = 0; i < cart.length; i++) {
@@ -95,18 +97,21 @@ function create_UUID() {
 async function updateUserAllData(currentUser) {
   let { _id, order_history, cart } = currentUser;
 
-  fetch(`http://localhost:3001/users/order/${currentUser._id}`, {
-    method: "PUT",
+  fetch(
+    `https://bluemercuryclone.herokuapp.com/users/order/${currentUser._id}`,
+    {
+      method: "PUT",
 
-    headers: {
-      "Content-type": "application/json",
-    },
+      headers: {
+        "Content-type": "application/json",
+      },
 
-    body: JSON.stringify({
-      id: _id,
-      orderData: order_history,
-    }),
-  })
+      body: JSON.stringify({
+        id: _id,
+        orderData: order_history,
+      }),
+    }
+  )
     .then((res) => res.json())
     .then((res) => {
       localStorage.setItem("current_user", JSON.stringify(...res));
@@ -124,7 +129,9 @@ async function validatePayment(e) {
   let currentUser = JSON.parse(localStorage.getItem("current_user"));
 
   try {
-    currentUser = await fetch(`http://localhost:3001/users/${currentUser._id}`);
+    currentUser = await fetch(
+      `https://bluemercuryclone.herokuapp.com/users/${currentUser._id}`
+    );
     currentUser = await currentUser.json();
   } catch (error) {
     console.log(error);

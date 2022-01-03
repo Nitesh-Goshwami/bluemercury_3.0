@@ -74,9 +74,11 @@ function cart_display(el) {
 
 const getUserData = async () => {
   let currentUser = JSON.parse(localStorage.getItem("current_user"));
-  currentUser = await fetch(`http://localhost:3001/users/${currentUser._id}`)
-    .then(res => res.json())
-    .then(res => updateUser(res, currentUser))
+  currentUser = await fetch(
+    `https://bluemercuryclone.herokuapp.com/users/${currentUser._id}`
+  )
+    .then((res) => res.json())
+    .then((res) => updateUser(res, currentUser))
     .catch((res) => console.error(res));
 }
 

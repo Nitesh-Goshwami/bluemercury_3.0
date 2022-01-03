@@ -4,7 +4,7 @@ async function check(e) {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  var res = await fetch("http://localhost:3001/users/login", {
+  var res = await fetch("https://bluemercuryclone.herokuapp.com/users/login", {
     // Adding method type
     method: "POST",
 

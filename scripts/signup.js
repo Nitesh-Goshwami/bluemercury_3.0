@@ -14,13 +14,16 @@ async function checkSignup(e) {
     password: password,
   };
 
-  let userData = await fetch("http://localhost:3001/users/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
+  let userData = await fetch(
+    "https://bluemercuryclone.herokuapp.com/users/signup",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  )
     .then((response) => {
       if (response.status === 403) {
         alert("User already exists, please login");
