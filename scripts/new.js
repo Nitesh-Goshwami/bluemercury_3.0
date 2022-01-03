@@ -18,6 +18,8 @@ function showItems(l) {
 
     let img = document.createElement("img");
     img.src = el.img;
+    img.style.maxHeight = "213.11px";
+    img.style.maxWidth = "196.1px"
 
     let wish = document.createElement("p");
     wish.innerHTML = "<i class='far fa-heart'></i>";
