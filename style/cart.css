@@ -288,19 +288,34 @@ Start: Cart Section
   border: 0px;
   width: 30%;
   margin-top: 21px;
+  text-align: center;
   float: right;
   margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 40px;
-  color: white;
   font-weight: 900;
   background-color: #12284c;
   font-family: "Montserrat Light", sans-serif;
   font-size: 14px;
   line-height: 23.1px;
   text-decoration: none;
+  cursor: pointer;
+}
+
+#checkout a {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#checkout:hover {
+  cursor: pointer;
+  box-sizing: border-box;
+  /* border: 3px solid #5d7496; */
+  box-shadow: 0px 0px 10px #12284c;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 .clear {

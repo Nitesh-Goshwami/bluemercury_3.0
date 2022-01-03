@@ -1,8 +1,11 @@
-var final_total = 0;
+let currentUser = JSON.parse(localStorage.getItem('current_user'));
 
-function showCart() {
-  let cart = JSON.parse(localStorage.getItem("shopping_bag"));
+async function showCart() {
+  currentUser = await fetch(`http://localhost:3001/users/${currentUser._id}`)
+    .then(res => res.json())
+    .catch(err => console.log(err));
 
+  let cart = currentUser.cart.cart_items
   for (let i = 0; i < cart.length; i++) {
     appendProducts(cart[i]);
   }
@@ -30,6 +33,7 @@ function appendProducts(el) {
   prod_desc.style.width = "60%";
   prod_desc.style.textAlign = "left";
   prod_desc.style.padding = "10px";
+  prod_desc.style.textTransform = "capitalize";
 
   let item_total = document.createElement("div");
   item_total.style.width = "20%";
@@ -39,19 +43,23 @@ function appendProducts(el) {
 
   let item_total_calculation = el.item_count * el.price;
   item_total.append(`$${item_total_calculation}`);
-  final_total += item_total_calculation;
 
   singleProdDiv.append(prod_img, prod_desc, item_total);
   prod_div.append(singleProdDiv);
 
-  var payment_amt = document.getElementById("total_amount");
-  payment_amt.innerHTML = `$${final_total + 5}`;
 }
 
-var subtotal = document.getElementById("total_price");
-subtotal.innerHTML = `$${final_total}`;
+function updatePayment() {
+  var payment_amt = document.getElementById("total_amount");
+  payment_amt.innerHTML = `$${currentUser.cart.total_price + 5}`;
 
-var apply = document.getElementById("apply_btn");
+  var subtotal = document.getElementById("total_price");
+  subtotal.innerHTML = `$${currentUser.cart.total_price}`;
+}
+
+updatePayment();
+
+let apply = document.getElementById("apply_btn");
 apply.addEventListener("click", function () {
   var promocode = document.getElementById("promocode_text2").value;
   var payment_amt = document.getElementById("total_amount");
@@ -83,32 +91,46 @@ function create_UUID() {
   return uuid;
 }
 
-console.log(create_UUID());
 
-function validatePayment(e) {
-  e.preventDefault();
-  localStorage.removeItem("shopping_bag");
-  localStorage.removeItem("current_selected_prod");
-  window.location.href = "thankyou.html";
+async function updateUserAllData(currentUser) {
+  let { _id, order_history, cart } = currentUser;
+
+  fetch(`http://localhost:3001/users/order/${currentUser._id}`, {
+    method: "PUT",
+
+    headers: {
+      "Content-type": "application/json",
+    },
+
+    body: JSON.stringify({
+      id: _id,
+      orderData: order_history,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      localStorage.setItem("current_user", JSON.stringify(...res));
+      window.location.href = "thankyou.html";
+      return res;
+    })
+    .catch((err) => console.error(err));
+
+  // localStorage.removeItem("current_selected_prod");
 }
 
-// Sign-up button change
+async function validatePayment(e) {
+  e.preventDefault();
 
-// function changeAccount() {
-//   let signup_btn = document.getElementById("login_change");
-//   let check_user = JSON.parse(localStorage.getItem("current_user"));
+  let currentUser = JSON.parse(localStorage.getItem("current_user"));
 
-//   if (check_user != null) {
-//     signup_btn.innerHTML = `<i class="fa fa-user-circle"></i> Account`;
-//     signup_btn.addEventListener("click", () => {
-//       window.location.href = "myaccount.html";
-//     });
-//   } else {
-//     signup_btn.innerHTML = `<i class="fa fa-user-circle"></i> Sign in/up`;
-//     signup_btn.addEventListener("click", () => {
-//       window.location.href = "login.html";
-//     });
-//   }
-// }
-
-// changeAccount();
+  try {
+    currentUser = await fetch(`http://localhost:3001/users/${currentUser._id}`);
+    currentUser = await currentUser.json();
+  } catch (error) {
+    console.log(error);
+  } finally {
+      let newId = create_UUID();
+      currentUser.order_history.push({ order: currentUser.cart, order_date: Date.now(), order_id: newId })
+      updateUserAllData(currentUser);
+  }
+}

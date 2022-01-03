@@ -81,7 +81,7 @@ function showItems(l) {
 // <-------------------------------Fetching the data from online database -------------------------->
 async function getData() {
   try {
-    let res = await fetch("http://localhost:3000/products/");
+    let res = await fetch("http://localhost:3001/products/");
     let data = await res.json();
     localStorage.setItem("items", JSON.stringify(data));
     showItems(data);

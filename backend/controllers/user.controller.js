@@ -95,6 +95,7 @@ router.delete("/:id", async (request, response) => {
 // Update Cart
 router.put("/cart/:id", async (req, res) => {
   const { id } = req.params;
+
   try {
     const results = await User.updateOne(
       {
@@ -102,10 +103,33 @@ router.put("/cart/:id", async (req, res) => {
       },
       {
         $set: {
-          "cart_items": req.body,
+          cart: req.body,
         },
       }
     );
+
+    const userData = await User.find().lean().exec();
+    return res.status(201).send(userData);
+  } catch (err) {
+    return res.status(401).send(err.message);
+  }
+});
+
+// update the order and empty the cart
+router.put("/order/:id", async (req, res) => {
+  try {
+    const results = await User.updateOne(
+      {
+        _id: req.params.id,
+      },
+      {
+        $set: {
+          cart: { cart_items: [], total_items: 0, total_price: 0},
+          order_history: req.body.orderData
+        },
+      }
+    );
+
     const userData = await User.find().lean().exec();
     return res.status(201).send(userData);
   } catch (err) {

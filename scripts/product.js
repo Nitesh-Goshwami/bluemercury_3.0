@@ -7,10 +7,15 @@ let remove_count = document.getElementById("remove_count");
 let add_count = document.getElementById("add_count");
 let product_count = document.getElementById("product_count");
 
+var current_prod = JSON.parse(localStorage.getItem("current_selected_prod"));
+
+
 // Image changing
 let img_1 = document.getElementById("img_1");
 let img_2 = document.getElementById("img_2");
 let main_img = document.getElementById("main_img");
+
+// let current``
 
 img_1.addEventListener("click", function () {
   main_img.src = current_prod.img;
@@ -37,21 +42,39 @@ cart_btn.addEventListener("click", async function () {
         return res;
       })
       .catch((err) => console.error(err));
-
+      
     function updateCart() {
       let flag = 0;
-      for (let i = 0; i < currentUser.cart_items.length; i++) {
-        if (currentUser.cart_items[i].prod_id_num == current_prod.prod_id_num) {
-          currentUser.cart_items[i].item_count = current_prod.item_count;
+      let totalItems = 0;
+      let totalPrice = 0;
+
+      if (currentUser.cart.total_items === 0) {
+        currentUser.cart.total_items = current_prod.item_count;
+        currentUser.cart.total_price = current_prod.price * current_prod.item_count;
+        currentUser.cart.cart_items.push(current_prod);
+      }
+
+      for (let i = 0; i < currentUser.cart.cart_items.length; i++) {
+        if (currentUser.cart.cart_items[i].prod_id_num == current_prod.prod_id_num) {
+          currentUser.cart.cart_items[i].item_count = current_prod.item_count;
           flag = 1;
-          break;
         }
+        totalItems += currentUser.cart.cart_items[i].item_count;
+        totalPrice +=
+          currentUser.cart.cart_items[i].item_count *
+          currentUser.cart.cart_items[i].price;
       }
 
+      
       if (flag === 0) {
-        currentUser.cart_items.push(current_prod);
+        currentUser.cart.cart_items.push(current_prod);
       }
 
+      currentUser.cart.total_items = totalItems;
+      currentUser.cart.total_price = totalPrice;
+      
+      console.log("currentUser", currentUser);
+      
       fetch(`http://localhost:3001/users/cart/${currentUser._id}`, {
         method: "PUT",
 
@@ -59,7 +82,11 @@ cart_btn.addEventListener("click", async function () {
           "Content-type": "application/json",
         },
 
-        body: JSON.stringify(currentUser.cart_items),
+        body: JSON.stringify({
+          cart_items: currentUser.cart.cart_items,
+          total_price: currentUser.cart.total_price,
+          total_items: currentUser.cart.total_items,
+        }),
       })
         .then((res) => res.json())
         .then((res) => {
@@ -98,8 +125,8 @@ add_count.addEventListener("click", function () {
     product_count.innerHTML = count;
   }
 });
+// var current_prod = JSON.parse(localStorage.getItem("current_selected_prod"));
 
-var current_prod = JSON.parse(localStorage.getItem("current_selected_prod"));
 
 document.title = `${current_prod.name} ${current_prod.title}`;
 

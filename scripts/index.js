@@ -153,3 +153,10 @@ prev.addEventListener('click', () => {
     a = 0;
     b = 4
 });
+
+
+let currentUser = JSON.parse(localStorage.getItem('current_user'));
+
+if (!currentUser) {
+    localStorage.setItem('current_user', JSON.stringify([]));
+}

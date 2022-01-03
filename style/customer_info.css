@@ -5,7 +5,7 @@
 #customer_container{    
     display:flex;
     flex-direction:row;
-    /* padding: 0 5%; */
+    justify-content: space-between;
     width:90%;
     margin:auto;
     margin-top: 40px;
@@ -22,7 +22,7 @@
 #sidepage_container{
     text-align: center;
     width:42%;
-    padding-left: 1%;
+    padding: 10px;
     /* border:1px solid red; */
     background-color:#f8f8f8;
     float:right;
@@ -158,6 +158,10 @@ input#Email_checkbox{
     opacity:0.70;
 }
 
+select {
+    width: 100%;
+}
+
 #state{
     opacity: 0.70;
 }
@@ -167,7 +171,6 @@ input#Email_checkbox{
     flex-direction: column;
     width:32%;
     margin-left:9px;
-
 }
 
 #zipcode{
@@ -230,7 +233,7 @@ input#Email_checkbox{
 /*  ASIDE PAGE CSS */
 
 #aside_main_div{
-    width:80%;
+    width:90%;
     margin:auto;
     display:flex;
     flex-direction: column;
@@ -359,10 +362,10 @@ border-radius:50%;
     width:100%;
     display:flex;
     flex-direction:row;
+    justify-content: space-between;
 }
 
 #subtotal{
-    text-align: left;
     font-size:16px;
     font-weight: 400;
 }
@@ -371,29 +374,25 @@ border-radius:50%;
     text-align: right;
     font-size:16px;
     font-weight: 400;
-    margin-left: 70%;
 }
 
 #subtotal_row2{
     width:100%;
     display:flex;
     flex-direction:row;
+    justify-content: space-between;
     margin-bottom: 35px;
 }
 
 #shipping{
-    text-align: left;
     font-size:16px;
     font-weight: 400;
 }
 
 #calcutate {
-  text-align: right;
   font-size: 16px;
   font-weight: 400;
-  margin-left: 72%;
 }
-
 
 #subtotal_row3{
     margin-top:10px;
@@ -402,20 +401,18 @@ border-radius:50%;
     width:100%;
     display:flex;
     flex-direction:row;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
 #total{
-    text-align: left;
     font-size:17px;
     font-weight: 500;
 }
 
 #total_amount{
-    text-align: right;
     font-size:20px;
     font-weight: 500;
-    margin-left: 58%;
 }
 
 #usd{
